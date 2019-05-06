@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+{% load staticfiles %}
+
+
+  <meta charset="UTF-8">
+
+  <title>Online Property Sales</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+      <link rel="stylesheet" href="{%static 'css/style.css'%}">
+
+
+</head>
+
+<body>
+
+  <header id="header">
+    <nav class="menu">
+      <div class="logo">
+        <img src="https://blog.junkmail.co.za/wp-content/uploads/2016/04/4.png">
+        <a href="#" class="btn-menu" id="btn-menu"><i class="icono fa fa-bars fa-2x" aria-hidden="true"></i></a>
+      </div>
+      <div class="enlaces" id="enlaces">
+                    <a class="nav-link js-scroll-trigger" href="/home/?type=home">
+<i class="fa fa-home" aria-hidden="true"></i>Home</a>
+      <a class="nav-link js-scroll-trigger" href="/register/?type=register" aria-hidden="true">User Registration</a>
+        <a class="nav-link js-scroll-trigger" href="/login/?type=login" aria-hidden="true">UserLogin</a>
+           <a class="nav-link js-scroll-trigger" href="/contactUs/?type=contact"aria-hidden="true">Contact Us</a>
+
+      </div>
+    </nav>
+</header>
+
+<style>
+        .image{
+            display: inline-block;
+            width: 30%;
+
+            margin: 20px 20px 0px 0px  ;
+            background-color: wheat;
+
+        }
+
+    </style>
+            {% for x in res %}
+           <div class="image">
+                <img src="{{ x.image.url }}" width="100%" height="300"><br></a>
+               Name:{{ x.property}}<br>
+             Price: {{ x.selling_price}}<br>
+               Contact:{{ x.contact }}<br>
+               Address :{{ x.address }}<br>
+
+
+
+          <a href="/BuyProperty/?id={{ x.property_id }}">Buy</a>
+           </div>
+
+{% endfor %}
+
+
+{# For Home#}
+
+
+
+
+
+             <style>
+div.gallery {
+  margin: 5px;
+  {#border: 1px solid #ccc;#}
+  float: left;
+  width: 180px;
+    padding-left: 80px;
+    padding-top: 30px;
+}
+
+
+
+div.gallery img {
+  width: 200px;
+  height: 50%;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+</style>
+
+
+{% for x in result %}
+<div class="gallery">
+
+  <a  href="/propertydetails/?type=product&id={{ x.property_id }}">
+    <img src="{{ x.image.url }}" alt="Cinque Terre" width="600" height="400">
+  </a>
+  <div class="desc">    Name:{{ x.property}}<br>
+                Price: {{ x.selling_price}}<br>
+
+               <a href="/propertydetails/?type=product&id={{ x.property_id}}">Show</a>
+           <a href="/BuyProperty/?id={{ x.property_id }}">Buy</a></div>
+</div>
+
+  {% endfor %}
+            <div class="gallery">
+                <p align="center">
+   {% if result.has_previous %}
+
+            <a href="/index/?page_no={{result.previous_page_number }}" >Previous >>{{ result.previous_page_number }}</a>
+
+        {% endif %}
+
+        {% if result.has_next %}
+
+            <a href="/index/?page_no={{result.next_page_number }}">Next<<{{result.next_page_number }}</a>
+
+        {% endif %}
+  </p>
+
+
+
+
+
+    </div>
+
+
+
+
+{#<section class="cards">#}
+{#    {% for x in result %}#}
+{#    <article class="card">#}
+{##}
+{#        <div class="miniatura">#}
+{##}
+{#            <a href="/propertydetails/?type=product&id={{ x.property_id }}"><img src="{{ x.image.url }}" width="1400" height="150"><br></a>#}
+{##}
+{#        </div>#}
+{#        <div class="card-content"><p>#}
+{#            Name:{{ x.property}}<br>#}
+{#                Price: {{ x.selling_price}}<br>#}
+{##}
+{#               <a href="/propertydetails/?type=product&id={{ x.property_id}}">Show</a>#}
+{#           <a href="/BuyProperty/?id={{ x.property_id }}">Buy</a></p>#}
+{#        </div><!-- .card-content -->#}
+{##}
+{#    </article><!-- .card -->#}
+{#      {% endfor %}#}
+{##}
+{#</section><!-- .cards -->#}
+{##}
+{#  <p align="center">#}
+{#   {% if result.has_previous %}#}
+{##}
+{#            <a href="/index/?page_no={{result.previous_page_number }}" >Previous >>{{ result.previous_page_number }}</a>#}
+{##}
+{#        {% endif %}#}
+{##}
+{#        {% if result.has_next %}#}
+{##}
+{#            <a href="/index/?page_no={{result.next_page_number }}">Next<<{{result.next_page_number }}</a>#}
+{##}
+{#        {% endif %}#}
+{#  </p>#}
+{##}
+{##}
+{##}
+{##}
+{#  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>#}
+{#<script src='https://use.fontawesome.com/ad4dcfdd90.js'></script>#}
+{##}
+{##}
+{##}
+{#    <script  src="{% static 'js/index.js' %}"></script>#}
+{##}
+
+
+
+
+        {% if type == "product" %}
+     <style>
+        .image{
+            display: inline-block;
+            width: 30%;
+
+            margin: 20px 20px 0px 0px  ;
+            background-color: wheat;
+
+        }
+
+    </style>
+            {% for x in res %}
+           <div class="image">
+                <img src="{{ x.image.url }}" width="100%" height="300"><br></a>
+               Name:{{ x.property}}<br>
+             Price: {{ x.selling_price}}<br>
+               Contact:{{ x.contact }}<br>
+               Address :{{ x.address }}<br>
+
+
+
+          <a href="/BuyProperty/?id={{ x.property_id }}">Buy</a>
+           </div>
+
+{% endfor %}
+{% endif %}
+
+{# For Home#}
+
+
+        {% if type == "home" %}
+            <h2>home</h2>
+
+
+{#             <style>#}
+{#div.gallery {#}
+{#  margin: 5px;#}
+  {#border: 1px solid #ccc;#}
+{#  float: left;#}
+{#  width: 180px;#}
+{#    padding-left: 80px;#}
+{#    padding-top: 30px;#}
+{#}#}
+{##}
+{##}
+{##}
+{#div.gallery img {#}
+{#  width: 200px;#}
+{#  height: 50%;#}
+{#}#}
+{##}
+{#div.desc {#}
+{#  padding: 15px;#}
+{#  text-align: center;#}
+{#}#}
+{#</style>#}
+{##}
+{##}
+{#{% for x in result %}#}
+{#<div class="gallery">#}
+{##}
+{#  <a  href="/propertydetails/?type=product&id={{ x.property_id }}">#}
+{#    <img src="{{ x.image.url }}" alt="Cinque Terre" width="600" height="400">#}
+{#  </a>#}
+{#  <div class="desc">    Name:{{ x.property}}<br>#}
+{#                Price: {{ x.selling_price}}<br>#}
+{##}
+{#               <a href="/propertydetails/?type=product&id={{ x.property_id}}">Show</a>#}
+{#           <a href="/BuyProperty/?id={{ x.property_id }}">Buy</a></div>#}
+{#</div>#}
+{##}
+{#  {% endfor %}#}
+{#            <div class="gallery">#}
+{#                <p align="center">#}
+{#   {% if result.has_previous %}#}
+{##}
+{#            <a href="/home/?type=home&page_no={{result.previous_page_number }}" >Previous >>{{ result.previous_page_number }}</a>#}
+{##}
+{#        {% endif %}#}
+{##}
+{#        {% if result.has_next %}#}
+{##}
+{#            <a href="/home/?type=home&page_no={{result.next_page_number }}">Next<<{{result.next_page_number }}</a>#}
+{##}
+{#        {% endif %}#}
+{#  </p>#}
+{##}
+{##}
+{##}
+        {% endif %}
+{##}
+{#    </div>#}
+
+
+{# For Registration#}
+
+
+        {% if type == "register" %}
+
+<link rel="stylesheet" href="{% static 'css/registation.css' %}">
+
+
+<div id="login-box">
+<form action="/registerDetails/" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="left">
+    <h1>Sign up</h1>
+
+    <input type="text" name="t1" placeholder="Name" />
+    <input type="text" name="t2" placeholder="E-mail" />
+    <input type="password" name="t3" placeholder="Password" />
+    <input type="password" name="t4" placeholder="Retype password" />
+    <input type="number" name="t5" placeholder="Contact number" />
+    <input type="file" name="t6"  />
+
+
+    <input type="submit" name="signup_submit" value="Sign Up" />
+  </div>
+    </form>
+
+  <div class="right">
+    <span class="loginwith">Sign in with<br />social network</span>
+
+      <form action="/facebook/">
+          {% csrf_token %}
+
+    <button class="social-signin facebook">facebook</button>
+            </form>
+
+
+    <button class="social-signin twitter">Twitter</button>
+
+       <form action="/gmail/">
+          {% csrf_token %}
+    <button class="social-signin google">Google+</button>
+       </form>
+  </div>
+  <div class="or">OR</div>
+</div>
+
+{% endif %}
+
+{# For Login#}
+
+{% if type == "login" %}
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+     <link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css">
+
+<div class="container">
+  <div class="row">
+
+    <div class="main">
+
+      <h3>Log In OR <a href="/register/?type=register">Sign Up</a></h3>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <a href="/facebook/" class="btn btn-lg btn-primary btn-block">Facebook</a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <a href="/gmail/" class="btn btn-lg btn-info btn-block">Google</a>
+        </div>
+      </div>
+      <div class="login-or">
+        <hr class="hr-or">
+        <span class="span-or">or</span>
+      </div>
+
+      <form role="form" action="/loginDetails/" method="post">
+          {% csrf_token %}
+        <div class="form-group">
+          <label for="inputUsernameEmail">Email</label>
+          <input type="text" class="form-control" id="inputUsernameEmail" name="u1">
+        </div>
+        <div class="form-group">
+          <a class="pull-right" href="/forget/?type=forget">Forgot password?</a>
+          <label for="inputPassword">Password</label>
+          <input type="password" class="form-control" id="inputPassword" name="u2">
+        </div>
+
+        <button type="submit" class="btn btn btn-primary" >
+          Log In
+        </button>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+{% endif %}
+
+
+
+{# ForgetPassword#}
+
+
+        {% if type1 == "forget" %}
+
+
+    <link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css">
+    <div class="container">
+     <div class="row">
+
+    <div class="main">
+        <form action="/forgetdetails/" method="post">
+            {% csrf_token %}
+
+    <div class="form-group">
+          <label for="inputUsernameEmail">Enter Your Email :</label>
+          <input type="email" class="form-control" id="inputUsernameEmail" name="u1" required>
+        </div>
+        <button type="submit" class="btn btn btn-primary" >
+          Submit
+        </button>
+            </form>
+    </div>
+
+     </div>
+    </div>
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+{% if type1 == "forgetdetails" %}
+
+    <link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css">
+    <div class="container">
+     <div class="row">
+
+    <div class="main">
+        <form action="/newpassword/" method="post">
+            <input type="hidden" value="{{ email }}" name="u0">
+            {% csrf_token %}
+
+    <div class="form-group">
+          <label for="inputUsernameEmail">Email :</label>
+          <input type="email" class="form-control" id="inputUsernameEmail" name="u1" value="{{ email }}">
+        </div>
+            <div class="form-group">
+          <label for="inputUsernameEmail">Password :</label>
+          <input type="password" class="form-control" id="inputUsernameEmail" name="u2"  required>
+        </div>
+
+            <div class="form-group">
+          <label for="inputUsernameEmail">Confirm Password :</label>
+          <input type="password" class="form-control" id="inputUsernameEmail" name="u3"  required>
+        </div>
+
+        <button type="submit" class="btn btn btn-primary" >
+          Submit
+        </button>
+            </form>
+    </div>
+
+     </div>
+    </div>
+
+{% endif %}
+
+
+
+{# Otp Validation#}
+
+
+
+        {% if type == "otpvalidation" %}
+    <form action="/otpvalidate/" method="post">
+    {% csrf_token %}
+
+    <div class="left">
+    <input type="number" name="t5" placeholder="Enter OTP" />
+    <input type="submit" name="signup_submit" value="Submit" />
+    </div>
+    </form>
+
+{% endif %}
+
+
+
+{#        For COntact Us     #}
+
+
+        {% if type == "contact" %}
+            <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+            <link href="{% static 'css/contact.css' %}" rel="stylesheet" type="text/css">
+
+
+            <div class="container">
+	<div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="well well-sm">
+          <form class="form-horizontal" action="/contact/" method="post">
+              {% csrf_token %}
+          <fieldset>
+            <legend class="text-center">Contact us</legend>
+
+            <!-- Name input-->
+            <div class="form-group">
+
+              <div class="col-md-9">
+                <input id="name" name="name" type="text" placeholder="Your name" class="form-control">
+              </div>
+            </div>
+
+            <!-- Email input-->
+            <div class="form-group">
+
+              <div class="col-md-9">
+                <input id="email" name="email" type="text" placeholder="Your email" class="form-control">
+              </div>
+            </div>
+
+            <!-- Message body -->
+            <div class="form-group">
+
+              <div class="col-md-9">
+                <textarea class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
+              </div>
+            </div>
+
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+              </div>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {% endif %}
+
+
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+          <p class="text-white-75 font-weight-light mb-5"></p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+</body>
+
+</html>

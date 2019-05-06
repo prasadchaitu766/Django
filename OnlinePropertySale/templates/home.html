@@ -1,0 +1,166 @@
+{% load staticfiles %}
+{% if type == "register" %}
+<link rel="stylesheet" href="{% static 'css/registation.css' %}">
+
+
+<div id="login-box">
+<form action="/registerDetails/" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="left">
+    <h1>Sign up</h1>
+
+    <input type="text" name="t1" placeholder="Name" />
+    <input type="text" name="t2" placeholder="E-mail" />
+    <input type="password" name="t3" placeholder="Password" />
+    <input type="password" name="t4" placeholder="Retype password" />
+    <input type="number" name="t5" placeholder="Contact number" />
+    <input type="file" name="t6"  />
+
+
+    <input type="submit" name="signup_submit" value="Sign Up" />
+  </div>
+    </form>
+
+  <div class="right">
+    <span class="loginwith">Sign in with<br />social network</span>
+      <form action="/facebook/">
+          {% csrf_token %}
+
+
+    <button class="social-signin facebook">facebook</button>
+            </form>
+
+
+    <button class="social-signin twitter">Twitter</button>
+       <form action="/gmail/">
+          {% csrf_token %}
+    <button class="social-signin google">Google+</button>
+       </form>
+  </div>
+  <div class="or">OR</div>
+</div>
+
+{% endif %}
+
+{% if type == "otpvalidation" %}
+    <form action="/otpvalidate/" method="post">
+    {% csrf_token %}
+
+    <div class="left">
+    <input type="number" name="t5" placeholder="Enter OTP" />
+    <input type="submit" name="signup_submit" value="Submit" />
+    </div>
+    </form>
+
+{% endif %}
+{% if type == "login" %}
+     <link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css">
+{#  <link href="{% static 'css/creative.min.css' %}" rel="stylesheet" type="text/css">#}
+
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+  <div class="row">
+
+    <div class="main">
+
+      <h3>Please Log In, or <a href="/register/?type=register">Sign Up</a></h3>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <a href="/facebook/" class="btn btn-lg btn-primary btn-block">Facebook</a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <a href="/gmail/" class="btn btn-lg btn-info btn-block">Google</a>
+        </div>
+      </div>
+      <div class="login-or">
+        <hr class="hr-or">
+        <span class="span-or">or</span>
+      </div>
+
+      <form role="form" action="/loginDetails/" method="post">
+          {% csrf_token %}
+        <div class="form-group">
+          <label for="inputUsernameEmail">Email</label>
+          <input type="text" class="form-control" id="inputUsernameEmail" name="u1">
+        </div>
+        <div class="form-group">
+          <a class="pull-right" href="/forget/?type=forget">Forgot password?</a>
+          <label for="inputPassword">Password</label>
+          <input type="password" class="form-control" id="inputPassword" name="u2">
+        </div>
+
+        <button type="submit" class="btn btn btn-primary" >
+          Log In
+        </button>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+{% endif %}
+{% if type1 == "forget" %}
+    <link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css">
+    <div class="container">
+     <div class="row">
+
+    <div class="main">
+        <form action="/forgetdetails/" method="post">
+            {% csrf_token %}
+
+    <div class="form-group">
+          <label for="inputUsernameEmail">Enter Your Email :</label>
+          <input type="email" class="form-control" id="inputUsernameEmail" name="u1" required>
+        </div>
+        <button type="submit" class="btn btn btn-primary" >
+          Submit
+        </button>
+            </form>
+    </div>
+
+     </div>
+    </div>
+
+{% endif %}
+{% if type1 == "forgetdetails" %}
+    <link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css">
+    <div class="container">
+     <div class="row">
+
+    <div class="main">
+        <form action="/newpassword/" method="post">
+            <input type="hidden" value="{{ email }}" name="u0">
+            {% csrf_token %}
+
+    <div class="form-group">
+          <label for="inputUsernameEmail">Email :</label>
+          <input type="email" class="form-control" id="inputUsernameEmail" name="u1" value="{{ email }}">
+        </div>
+            <div class="form-group">
+          <label for="inputUsernameEmail">Password :</label>
+          <input type="password" class="form-control" id="inputUsernameEmail" name="u2"  required>
+        </div>
+
+            <div class="form-group">
+          <label for="inputUsernameEmail">Confirm Password :</label>
+          <input type="password" class="form-control" id="inputUsernameEmail" name="u3"  required>
+        </div>
+
+        <button type="submit" class="btn btn btn-primary" >
+          Submit
+        </button>
+            </form>
+    </div>
+
+     </div>
+    </div>
+
+{% endif %}
+
+
+

@@ -1,0 +1,204 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EmployeeRegister</title>
+</head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js">
+</script>
+<body>
+<table align="center" border="1">
+    <tr>
+        <td>
+            <form action="/register/" method="post">
+                {% csrf_token %}
+
+                <table align="center" border="0">
+                    <tr><th>Registration Form</th></tr>
+
+                    <tr><td  width="100"><input type="number" placeholder="ID NO" name="p1" required></td></tr>
+                    <tr><td  width="100"><input type="text" placeholder="Name" name="p2" required></td></tr>
+                    <tr><td  width="100"><input type="date" placeholder="Date Of Birth" name="p3"  min="1900-01-01" max="2000-01-01" required></td></tr>
+                    <tr><td  width="100"><input type="date" placeholder="Date Of Joinning" name="p4" required></td></tr>
+                    <tr><td  width="100">
+                        <input type="radio" name="p5" value="Male" checked>Male<br>
+                        <input type="radio" name="p5" value="FeMale" >FeMale<br>
+
+                    </td>
+                        </tr>
+                    <tr>
+                    <td  width="100">
+                        <input type="number" placeholder="COntactno" name="p6" required>
+                    </td>
+                        </tr>
+                    <tr>
+                    <td  width="100"><input type="email" placeholder="Email Id" name="p7" required></td>
+                        </tr>
+                    <tr>
+                    <td  width="100">
+                        <select name="p8">
+                            <option> --Select Designation--</option>
+                            <option> Developer</option>
+                            <option> Tester</option>
+                            <option> TL</option>
+                            <option> Manager</option>
+                        </select>
+                    </td>
+                        </tr>
+                    <tr>
+                    <td  width="100">
+                        <input type="number" placeholder="Salary" required name="p9">
+
+                    </td>
+                        </tr>
+                    <tr>
+                    <th  width="100">
+                        <button type="submit"> Register </button>
+                    </th>
+                        </tr>
+                </table>
+            </form>
+        </td>
+        <td>
+        {% if not res %}
+        <h4>No registration Details Available</h4>
+        {% else %}
+
+         <table align="center" border="0">
+            <tr bgcolor="#6495ed">
+                <td width="100">Id</td>
+                <td width="100">Name</td>
+                <td width="100">Image</td>
+                <td width="100"></td>
+            </tr>
+            {% for x in res %}
+            <tr bgcolor="#faebd7">
+                <th width="100">{{ x.id }}</th>
+                <th width="100">{{ x.name }}</th>
+                <th width="100">
+                    <img src="{% static "images/1.jpg"%}" width="40" height="30">
+                </th>
+                <th width="100">
+                    <form action="/showDetails/?type=Show&email={{ x.email }}" method="post">
+                        {% csrf_token %}
+                         <button>show</button><br><br>
+                    </form>
+                    <form action="/updateDetails/?type=update&email={{ x.email }}" method="post">
+                        {% csrf_token %}
+
+                    <button>update</button><br><br>
+                    </form>
+                    <form action="/deleteDetails/?email={{ x.email }}" method="post">
+                        {% csrf_token %}
+                    <button>delete</button><br><br>
+                    </form>
+                </th>
+
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        </td>
+    <td>
+        {% if type == "update" %}
+<form action="/UpdateDetails/" method="post">
+                {% csrf_token %}
+
+
+                <table align="center" border="0">
+                    {% for x in res1 %}
+
+
+                    <tr><td  width="100"><input type="number" value="{{ x.id }}" name="p1" readonly></td></tr>
+                    <tr><td  width="100"><input type="text" value="{{ x.name }}" name="p2" required></td></tr>
+{#                    <tr><td  width="100"><input type="date" value="{{ x.dob|date:'Y-m-d' }}"  name="p3"  min="1900-01-01" max="2000-01-01" readonly></td></tr>#}
+{#                    <tr><td  width="100"><input type="date" value="{{ x.doj|date:'Y-m-d' }}" name="p4" readonly></td></tr>#}
+                    <tr><td  width="100">
+                        <input type="text" name="p5" value="{{ x.gender }}" readonly>
+
+
+                    </td>
+                        </tr>
+                    <tr>
+                    <td  width="100">
+                        <input type="number" value="{{ x.contactno }}" name="p6" required>
+                    </td>
+                        </tr>
+                    <tr>
+                    <td  width="100"><input type="email" value="{{ x.email }}" name="p7" readonly></td>
+                        </tr>
+                    <tr>
+                    <td  width="100">
+                        <input type="text" value="{{ x.designation }}" name="p8" readonly>
+
+                    </td>
+                        </tr>
+                    <tr>
+                    <td  width="100">
+                        <input type="number" value="{{ x.salary }}" readonly name="p9">
+
+                    </td>
+                        </tr>
+                    <tr>
+                    <th  width="100">
+                        <button type="submit"> Update </button>
+                    </th>
+                        </tr>
+
+                </table>
+     {% endfor %}
+</form>
+{% endif %}
+    </td>
+    </tr>
+</table>
+{% if type == "Show" %}
+
+
+<table align="center" border="1" id="details">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>Date of Birth</th>
+        <th>Date of Joining</th>
+        <th>Gender</th>
+        <th>Contact No</th>
+        <th>Gmail</th>
+        <th>Designation</th>
+        <th>Salary</th>
+    </tr>
+
+        <tr>
+        <td>{{ id }}</td>
+        <td>{{ name }}</td>
+        <td>{{ dob }}</td>
+        <td>{{ doj }}</td>
+        <td>{{ gender }}</td>
+        <td>{{ contact }}</td>
+        <td>{{ email }}</td>
+        <td>{{ des }}</td>
+        <td>{{ salary }}</td>
+        </tr>
+
+
+</table>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js">
+</script>
+    <script>
+    $(document).ready(function(){
+        $("button").click(function(){
+            $("#details").toggle();
+        });
+    });
+    </script>
+{% endif %}
+
+
+
+<h2 align="center"> {{ message }}</h2>
+
+
+
+</body>
+</html>

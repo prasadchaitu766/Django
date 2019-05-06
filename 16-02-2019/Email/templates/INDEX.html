@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/save/" method="post">
+    {% csrf_token %}
+
+<table align="center" border="1">
+    <tr>
+        <td>
+            <input type="number" placeholder="IDNO" required name="t1">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="text" placeholder="NAME" required name="t2">
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="emaii" placeholder="CONTACT" required name="t3">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="number" placeholder="Email" required name="t4">
+        </td>
+    </tr>
+    <tr>
+        <input type="submit" value="Submit">
+    </tr>
+</table>
+</form>
+</body>
+</html>

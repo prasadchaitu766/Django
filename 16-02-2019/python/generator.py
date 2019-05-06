@@ -1,0 +1,7 @@
+l1=(1,2,3,33,44)
+y=(x*2 for x in l1)
+print(y)
+print(next(y))
+print(next(y))
+print(next(y))
+print(next(y))

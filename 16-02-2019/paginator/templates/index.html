@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/save/" method="post">
+    {% csrf_token %}
+
+<table align="center" border="1">
+    <tr>
+        <td>
+            <input type="number" name="t1" required placeholder="IDNO">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="text" name="t2" required placeholder="NAME">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="tel" name="t3" required placeholder="Contact">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="email" name="t4" required placeholder="Email">
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <input type="submit" value="Register">
+        </th>
+    </tr>
+</table>
+
+    </form>
+{% if not res %}
+<h1>Data Not Available</h1>
+{% else%}
+<table align="center" border="1">
+    <tr>
+        <th>IdNO</th>
+        <th>Name</th>
+        <th>Contact</th>
+        <th>email</th>
+    </tr>
+    {% for x in res %}
+        <tr>
+        <td>{{ x.Id }}</td>
+        <td>{{ x.Name }}</td>
+        <td>{{ x.contact }}</td>
+        <td>{{ x.email }}</td>
+        </tr>
+
+    {% endfor %}
+ <tr>
+        <td colspan="2">
+            {% if res.has_previous %}
+            <a href="/index/?pageno={{ res.previous_page_number }}">
+            PreviousPage{{ res.previous_page_number }}
+                </a>
+                {% endif %}
+        </td>
+
+        <td></td>
+        <td colspan="2">
+            {% if res.has_next %}
+            <a href="/index/?pageno={{ res.next_page_number }}">
+            NextPage{{ res.next_page_number }}
+                </a>
+                {% endif %}
+        </td>
+        </tr>
+</table>
+
+
+
+{% endif %}
+
+</body>
+</html>

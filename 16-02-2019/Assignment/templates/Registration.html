@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registratin</title>
+</head>
+<body>
+<table align="center" border="2">
+    <tr>
+        <td>
+            Home
+        </td>
+        <td>
+            <a href="/loginForm/?type=loginForm">
+            Student Login</a>
+        </td>
+        <td>
+            <a href="/register/?type=register">
+            Student Registration</a>
+        </td>
+
+    </tr>
+</table>
+{% if type == "loginForm" %}
+<form action="/login/" method="post">
+    {% csrf_token %}
+
+<table align="center" border="2">
+    <tr>
+        <th>Login Form</th>
+    </tr>
+    <tr>
+        <td>
+            <input type="text" placeholder="Username" required name="u1">
+        </td>
+    </tr>
+     <tr>
+        <td>
+            <input type="password" placeholder="Password" required name="u2">
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <input type="submit" value="Login">
+        </th>
+    </tr>
+
+</table>
+    </form>
+    <h4 align="center">
+    <a href="/register/?type=register">
+        Registration
+    </a>
+</h4>
+{% endif %}
+
+<form action="/registerDetails/" method="post">
+    {% csrf_token %}
+
+{% if type == "register" %}
+    <table align="center" border="center">
+    <tr>
+        <th>Registration form</th>
+    </tr>
+    <tr>
+        <td>
+            <input type="text" placeholder="Name" required name="t1">
+        </td>
+
+    </tr>
+        <tr>
+        <td>
+            <input type="number" placeholder="Contact" required name="t2">
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            <input type="text" placeholder="Username" required name="t3">
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            <input type="password" placeholder="Password" required name="t4">
+        </td>
+
+    </tr>
+    <tr>
+        <th>
+            <input type="submit"  value="Register">
+        </th>
+
+    </tr>
+    </table>
+
+{% endif %}
+</form>
+<h5 align="center"> {{ message }}</h5>
+{% if type == "login" %}
+    <table align="center" border="2">
+    <tr>
+        <td>
+            <h4 align="center">WelCome To :{{ name }}</h4>
+        </td>
+    </tr>
+
+    <tr>
+        <th>
+            <a href="/showDetails/?type=showdetails&contact={{ contact }}">
+                Show Details
+            </a>
+        </th>
+    </tr>
+    </table>
+{% endif %}
+{% if type == "showdetails" %}
+    <table align="center" border="2">
+
+    <tr>
+        <th>Name  </th><td>{{ name }}</td>
+    </tr>
+        <tr>
+        <th>ContactNO </th><td>{{ contact }}</td>
+            </tr>
+        <tr>
+        <th>Username  </th><td>{{ username }}</td>
+            </tr>
+        <tr>
+        <th>Password  </th><td>{{ password }}</td>
+    </tr>
+        <tr>
+            <th>
+                <form action="/delete/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ contact }}" name="contact">
+                    <button type="submit">Delete</button>
+                </form>
+
+            </th>
+            <th>
+                <form action="/update/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ contact }}" name="contact">
+                    <button type="submit">Update</button>
+                </form>
+
+            </th>
+        </tr>
+
+
+
+
+    </table>
+{% endif %}
+<form action="/updatedetails/" method="post">
+    {% csrf_token %}
+
+{% if type == "updatedetails"%}
+    <table align="center" border="center">
+    <tr>
+        <th>Registration form</th>
+    </tr>
+    <tr>
+        <td>
+            <input type="text"  value="{{ name }}" name="t1">
+        </td>
+
+    </tr>
+        <tr>
+        <td>
+            <input type="number" value="{{ contact }}"  name="t2" readonly>
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            <input type="text" value="{{ username }}"  name="t3">
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            <input type="password" value="{{ password }}"  name="t4">
+        </td>
+
+    </tr>
+    <tr>
+        <th>
+            <input type="submit"  value="Update">
+        </th>
+
+    </tr>
+    </table>
+    </form>
+
+{% endif %}
+
+</body>
+</html>
